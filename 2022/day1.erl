@@ -11,12 +11,14 @@ get_input(Filename) ->
 
 
 solve() ->
-    Input = get_input("input1-1.txt"), % lists of lists of int
+    Input = get_input("input1.txt"), % list of lists of ints
+    % io:format("Input: ~w~n", [Input]),
     io:format("Part 1: ~w~n", [solve1(Input)]),
     io:format("Part 2: ~w~n", [solve2(Input)]).
 
 solve1(Input) ->
-    lists:max(lists:map(fun lists:sum/1, Input)).
+    lists:foldl(fun(X, Sum) -> max(lists:sum(X), Sum) end, 0, Input).
+    % lists:max(lists:map(fun lists:sum/1, Input)).
 
 solve2(Input) ->
     % sum sublist; sort in descending order; grab first 3; get sum
